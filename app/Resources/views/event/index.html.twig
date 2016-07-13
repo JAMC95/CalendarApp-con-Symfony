@@ -1,0 +1,40 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Eventos</h3>
+        </div>
+        <div class="panel-body">
+            {% for flashMessage in app.session.flashBag.get('notice') %}
+                <div class="alert alert-success">{{ flashMessage }}</div>
+            {% endfor %}
+            <table class="table table-striped">
+                <thead>
+
+                <tr>
+                    <th>Nombre del evento</th>
+                    <th>Categoria</th>
+                    <th>Detalles</th>
+                    <th>Fecha</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for event in events %}
+                <tr>
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.category.name }}</td>
+                    <td>{{ event.getDetails() }}</td>
+                    <td>{{ event.day | date('F j, Y, g:i') }}</td>
+                    <td><a href="/calendario/web/app_dev.php/event/edit/{{ event.id }}" class="btn btn-default">Editar</a>
+                        <a href="/calendario/web/app_dev.php/event/delete/{{ event.id }}" class="btn btn-danger">Borrar</a></td>
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

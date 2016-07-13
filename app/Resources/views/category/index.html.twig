@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+   <div class="panel panel-default">
+      <div class="panel-heading">
+         <h3 class="panel-title">Categorias</h3>
+      </div>
+      <div class="panel-body">
+         {% for flashMessage in app.session.flashBag.get('notice') %}
+            <div class="alert alert-success">{{ flashMessage }}</div>
+         {% endfor %}
+        <table class="table table-striped">
+           <thead>
+
+           <tr>
+
+              <th>Nombre de la categoria</th>
+              <th></th>
+           </tr>
+           </thead>
+           <tbody>
+           {% for category in categories %}
+            <tr>
+
+               <td>{{ category.name }}</td>
+               <td><a href="/calendario/web/app_dev.php/category/edit/{{ category.id }}" class="btn btn-default">Editar</a>
+               <a href="/calendario/web/app_dev.php/category/delete/{{ category.id }}" class="btn btn-danger">Borar</a></td>
+            </tr>
+           {% endfor %}
+           </tbody>
+        </table>
+      </div>
+   </div>
+{% endblock %}
